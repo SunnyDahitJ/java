@@ -574,13 +574,13 @@ class Payroll extends Employee_details {
     }
     // Anonymous Class Extending a Class
 
-    Payroll p1 = new Payroll()
-    {
-    void calculate_CTC()
-    {
-    System.out.println("\n This is the Default CTC!! from Anonomus class");
-    }
-    };
+    // Payroll p1 = new Payroll()
+    // {
+    // void calculate_CTC()
+    // {
+    // System.out.println("\n This is the Default CTC!! from Anonomus class");
+    // }
+    // };
 
 }
 
