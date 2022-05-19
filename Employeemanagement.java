@@ -1,6 +1,7 @@
 import java.util.*;
 import java.util.Scanner;
 
+
 class Employeemanagement {
 
     public static void main(String[] args) {
@@ -63,7 +64,11 @@ class Employee_details {
         Project_assigned = "Employee management system";
     }
 
-
+    // Employee_details()
+    // {
+    //     E_id++;
+    //     System.out.println("New employee ID generated!!");
+    // }
     void getempdetails() {
         System.out.println("\n===============================");
         System.out.println("Employee ID : " + E_id);
@@ -242,7 +247,8 @@ class Manager extends Employee_details {
                 System.out.println("2.Update employee details(company mail, Manager name and designation only!!)\n");
                 System.out.println("3.Terminate employee\n");
                 System.out.println("4.logout\n");
-                // System.out.println("5.List department details");
+                //System.out.println("5. department details");
+                System.out.println("5.List department details");
                 // System.out.println("6.Project details");
                 System.out.println("Enter your choice\n");
                 int choice = sc.nextInt();
@@ -300,26 +306,58 @@ class Manager extends Employee_details {
                 } else if (choice == 4) {
                     System.out.println("\nlogged out successfully!\n");
                     System.exit(0);
+                } else if(choice == 5)
+                {
+                    Project p1 = new Project();
+                    p1.depart_display();
+                    //p1.profit(revenue,expenses);
                 }
+                
             }
         }
     }
 }
-
-class Department extends Employee_details {
+//abstract Class
+abstract class Department extends Employee_details {
     protected int dept_id;
     public String dept_name;
     protected float revenue;
     protected float expenses;
 
-    void profit() {
-        System.out.println("\n Net profit is : nothing right now!!");
-    }
-
-    // Anonymous Object
     {
-        new Department().profit();
+        dept_id = 10001;
+        dept_name = "Information Technology";
+        revenue = 74499;
+        expenses = 72882;
     }
+    Department()
+    {
+        dept_id++;
+        System.out.println("Department ID is "+dept_id);
+    }
+    Scanner sc = new Scanner(System.in);
+    void get_data()
+    {
+        System.out.println("Enter the department name: ");
+        dept_name = sc.next();
+        System.out.println("Enter the revenue generated: ");
+        revenue = sc.nextFloat();
+        System.out.println("Enter the total expenses: ");
+        expenses = sc.nextFloat();
+        profit(revenue,expenses);
+    }
+    void depart_display()
+    {
+        System.out.println("Department id : "+dept_id);
+        System.out.println("Department name: "+dept_name);
+        System.out.println("Department revenue: "+revenue);
+        System.out.println("Department expences : "+expenses);
+    }
+    abstract void profit(float rev, float expen);
+    // // Anonymous Object
+    // {
+    //     new Department().profit();
+    // }
 }
 
 class Project extends Department {
@@ -333,8 +371,13 @@ class Project extends Department {
     String Client_name;
 
     Project() {
+        //super key word to access parent class method
+        super();
+        super.get_data();
         project_id++;
         System.out.println("project id is " + project_id);
+        System.out.println("From department \n");
+        //super.depart_display();
     }
 
     // Project(int project_id)
@@ -343,6 +386,12 @@ class Project extends Department {
     // }
     void show_active_projects() {
         System.out.println("\nlist of active projects");
+    }
+
+    public void profit(float rev,float expen)
+    {
+        float net_profit  = (rev - expen);
+        System.out.println(" Profit of the department : "+net_profit);
     }
 
 }
@@ -435,6 +484,9 @@ class client extends Project {
     // }
 
 }
+
+
+
 
 class Payroll extends Employee_details {
     float basic_pay;
@@ -539,7 +591,7 @@ class Company {
     static String cityName = "Bangalore";
 
     static class CompanyInner {
-         void info() { 
+        void info() { 
             System.out.printf("=================================================================\n");
             System.out.printf("Company Name : "+org_name +"\n Location: "+stateName + cityName+"\n");
             System.out.printf("=================================================================\n");         
@@ -562,6 +614,5 @@ class Company {
 
     }
 }
-
 
 
